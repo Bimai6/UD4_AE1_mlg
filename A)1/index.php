@@ -1,27 +1,22 @@
-<?php
-require 'controlador.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios</title>
+    <title>Iniciar Sesión</title>
 </head>
 <body>
-    <h1>Usuarios y Roles</h1>
-    <table border="1">
-        <tr>
-            <th>Nombre de Usuario</th>
-            <th>Rol</th>
-        </tr>
-        <?php foreach ($usuarios as $usuario): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($usuario['user_name']); ?></td>
-                <td><?php echo htmlspecialchars($usuario['role_name']); ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <form action="controlador.php" method="post">
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Iniciar sesión">
+    </form>
+    <?php if (isset($_GET['error'])): ?>
+        <p style="color: red;"><?= htmlspecialchars($_GET['error']) ?></p>
+    <?php endif; ?>
 </body>
 </html>
