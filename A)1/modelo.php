@@ -23,7 +23,10 @@ class Modelo {
             $result = $stmt->get_result();
             if ($result->num_rows === 1) {
                 $row = $result->fetch_assoc();
-                if (hash("sha256", $password) == $row['password']) {
+                $hashedPassword = hash("sha256", $password);
+                echo "Hash calculado: $hashedPassword\n";
+                echo "Hash esperado: {$row['password']}\n";
+                if ($hashedPassword == $row['password']) {
                     return ['success' => true, 'role_id' => $row['role_id']];
                 }
             }

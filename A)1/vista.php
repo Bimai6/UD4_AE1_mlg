@@ -1,4 +1,11 @@
-<?php if (!isset($username)) die('Acceso no autorizado'); ?>
+<?php
+if (!isset($_SESSION['username'])) {
+    die('Acceso no autorizado');
+}
+
+$username = $_SESSION['username'];
+$role_id = $_SESSION['role_id'];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,18 +19,22 @@
     <p>Rol: <?= $role_id === 1 ? 'Admin' : 'User' ?></p>
     <h2>Permisos:</h2>
     <ul>
-        <?php foreach ($permisos as $permiso): ?>
-            <li><?= htmlspecialchars($permiso) ?></li>
-        <?php endforeach; ?>
+        <?php if (isset($permisos) && count($permisos) > 0): ?>
+            <?php foreach ($permisos as $permiso): ?>
+                <li><?= htmlspecialchars($permiso) ?></li>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No tienes permisos asignados.</p>
+        <?php endif; ?>
     </ul>
-    <form method="post">
+    <form method="POST">
         <button name="logout">Cerrar Sesión</button>
     </form>
 
     <?php
     if (isset($_POST['logout'])) {
         session_destroy();
-        header("Location: index.php");
+        header("Location: index.php"); 
         exit;
     }
     ?>
