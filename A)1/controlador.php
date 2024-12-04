@@ -16,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['role_id'] = $loginResult['role_id'];
         header("Location: controlador.php");
         exit;
+    }elseif (isset($_POST['logout'])) {
+        header("Location: index.php"); 
+        exit;
     } else {
         header("Location: index.php?error=Credenciales incorrectas."); 
         exit;

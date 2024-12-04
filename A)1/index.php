@@ -1,3 +1,7 @@
+<?php if (isset($_GET['error'])): ?>
+        <p style="color: red;"><?= htmlspecialchars($_GET['error']) ?></p>
+    <?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +19,5 @@
         <br>
         <input type="submit" value="Iniciar sesión">
     </form>
-    <?php if (isset($_GET['error'])): ?>
-        <p style="color: red;"><?= htmlspecialchars($_GET['error']) ?></p>
-    <?php endif; ?>
 </body>
 </html>
